@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"fir-with-ostad","appId":"1:230713811935:android:c3d5e5e913c0caae075a6a","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"fir-with-ostad","configurations":{"android":"1:230713811935:android:c3d5e5e913c0caae075a6a","ios":"1:230713811935:ios:09c40a968e7e19f8075a6a"}}}}}}
