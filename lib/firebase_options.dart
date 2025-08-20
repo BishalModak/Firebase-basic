@@ -60,7 +60,7 @@ class DefaultFirebaseOptions {
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'USE_YOUR_API_KEY',
     appId: 'USE_YOUR_APPID:ios:IOS',
-    messagingSenderId: 'USE_YOUR_SENDER_ID',
+    messagingSenderId: 'USE_YOUR_SENDERID',
     projectId: 'fir-with-ostad',
     storageBucket: 'fir-with-ostad.firebasestorage.app',
     iosBundleId: 'com.example.firebase',
