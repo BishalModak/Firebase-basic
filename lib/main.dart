@@ -1,11 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase/fcm_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'fcm_service.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  final FCMService fcmService = FCMService();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await fcmService.initialize();
+  print(await FCMService().getFcmToken());
+  await fcmService.onTockenRefresh();
+
+
   runApp(MyApp());
 }
 
