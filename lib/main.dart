@@ -67,33 +67,37 @@ class _MyHomePageState extends State<MyHomePage> {
               context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
             ) {
-
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator(),);
-          }
-          if(snapshot.hasError){
-            return Center(child: Text(snapshot.error.toString()),);
-          }
-          if(snapshot.hasData){
-            _listOfScore.clear();
-            for (QueryDocumentSnapshot<Map<String, dynamic>> doc in snapshot.data!.docs) {
-              LiveScore liveScore = LiveScore(
-                id: doc.id,
-                team1Name: doc.get('team1'),
-                team2Name: doc.get('team2'),
-                team1Score: doc.get('team1_score'),
-                team2Score: doc.get('team2_score'),
-                isRunning: doc.get('its_running'),
-                winnerTeam: doc.get('winner_team'),
-              );
-              _listOfScore.add(liveScore);
-            }
-          }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error.toString()));
+              }
+              if (snapshot.hasData) {
+                _listOfScore.clear();
+                for (QueryDocumentSnapshot<Map<String, dynamic>> doc
+                    in snapshot.data!.docs) {
+                  LiveScore liveScore = LiveScore(
+                    id: doc.id,
+                    team1Name: doc.get('team1'),
+                    team2Name: doc.get('team2'),
+                    team1Score: doc.get('team1_score'),
+                    team2Score: doc.get('team2_score'),
+                    isRunning: doc.get('its_running'),
+                    winnerTeam: doc.get('winner_team'),
+                  );
+                  _listOfScore.add(liveScore);
+                }
+              }
               return ListView.builder(
                 itemCount: _listOfScore.length,
                 itemBuilder: (context, index) {
                   LiveScore liveScore = _listOfScore[index];
+
                   return ListTile(
+                    onLongPress: (){
+                      db.collection('football').doc(liveScore.id).delete();
+                    },
                     leading: CircleAvatar(
                       backgroundColor: liveScore.isRunning
                           ? Colors.green
@@ -125,6 +129,31 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          LiveScore liveScore = LiveScore(
+            id: 'argvsgermany',
+            team1Name: 'Argentina',
+            team2Name: 'Germany',
+            team1Score: 3,
+            team2Score: 5,
+            isRunning: true,
+            winnerTeam: '',
+          );
+          await db
+              .collection('football')
+              .doc(liveScore.id)
+              .update(liveScore.toMap());
+        },
+
+        //add
+    //       await db
+    //       .collection('football')
+    //       .doc(liveScore.id)
+    //       .set(liveScore.toMap());
+    // },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
@@ -147,4 +176,15 @@ class LiveScore {
     required this.isRunning,
     required this.winnerTeam,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'team1': team1Name,
+      'team2': team2Name,
+      'team1_score': team1Score,
+      'team2_score': team2Score,
+      'its_running': isRunning,
+      'winner_team': winnerTeam,
+    };
+  }
 }
