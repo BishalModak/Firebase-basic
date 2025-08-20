@@ -50,17 +50,17 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB_bHn0FCB6rZDB9j4c1fCAQfoUjQaunyE',
-    appId: '1:230713811935:android:c3d5e5e913c0caae075a6a',
-    messagingSenderId: '230713811935',
+    apiKey: 'USE_YOUR_API_KEY',
+    appId: 'USE_YOUR_APPID:android:ANDROID',
+    messagingSenderId: 'USE_YOUR_SENDER_ID',
     projectId: 'fir-with-ostad',
     storageBucket: 'fir-with-ostad.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDyVDyOX3vPmHhzk7BuBmHnTLolrDC0OFg',
-    appId: '1:230713811935:ios:09c40a968e7e19f8075a6a',
-    messagingSenderId: '230713811935',
+    apiKey: 'USE_YOUR_API_KEY',
+    appId: 'USE_YOUR_APPID:ios:IOS',
+    messagingSenderId: 'USE_YOUR_SENDER_ID',
     projectId: 'fir-with-ostad',
     storageBucket: 'fir-with-ostad.firebasestorage.app',
     iosBundleId: 'com.example.firebase',
